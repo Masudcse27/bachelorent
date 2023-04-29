@@ -1,8 +1,7 @@
 <?php
 include('template/check_login.php');
-session_start();
+$userId=$_SESSION['UserId'];
     if(isset($_POST['submitFlatPost'])){
-        $userId=$_SESSION['UserId'];
         $Number=$_POST['number'];
         $Email=$_POST['email'];
         $availableFrom=$_POST['available'];
@@ -31,11 +30,10 @@ session_start();
                 mysqli_query($con,$img_ins);
                 $i+=1;
             }
-            header("location: flatpost.php");
+            
         }
     }
-    else if(isset($_POST['submitroommet'])){
-        $userId=$_SESSION['UserId'];
+    else if(isset($_POST['submitroommet'])){ 
         $Number=$_POST['number'];
         $Email=$_POST['email'];
         $availableFrom=$_POST['available'];
@@ -48,9 +46,9 @@ session_start();
         $mainImageTmpName= $_FILES['mainimage']['tmp_name'];
         $mainImageLocation="images/roommatemainimage/".$mainImageName;
         move_uploaded_file($mainImageTmpName,$mainImageLocation);
-        echo $Details;
-        $flatPostQuery="INSERT roommate VALUES(NULL,'$userId','$Number','$Email',now(),'$availableFrom','$NumberOfSeat','$Rent','$Addres','$tagDescrip','$Details',1,'$mainImageLocation')";
-        $con=mysqli_connect('localhost','root','','bachelorent');
+        //echo $Details;
+        $flatPostQuery="INSERT roommate VALUES(NULL,'$userId','$Number','$Email',now(),'$availableFrom','$NumberOfSeat','$Rent','$Addres','$tagDescrip','$Details',1,'$mainImageLocation',0)";
+        //$con=mysqli_connect('localhost','root','','bachelorent');
         if(mysqli_query($con,$flatPostQuery)){
             $getThisPost_id_sql="SELECT max(roomID) AS post_id FROM `roommate` WHERE userID='$userId'";
             $getThisPost_id_Query=mysqli_fetch_assoc(mysqli_query($con,$getThisPost_id_sql));
@@ -66,9 +64,37 @@ session_start();
                 mysqli_query($con,$img_ins);
                 $i+=1;
             }
-            header("location: roompost.php");
+            
         }
     }
+    else{
+        $catagory=$_POST['category'];
+        $loccation=$_POST['Location'];
+        $Rent=$_POST['rent'];
+        $freeFrom=$_POST['available'];
+        $mainImageName=$_FILES['mainimage']['name'];
+        $mainImageTmpName= $_FILES['mainimage']['tmp_name'];
+        $mainImageLocation="images/parkingmainimg/".$mainImageName;
+        move_uploaded_file($mainImageTmpName,$mainImageLocation);
+        $flatPostQuery="INSERT parking VALUES(NULL,'$userId','$catagory','$loccation',now(),'$freeFrom','$Rent',1,0,'$mainImageLocation')";
+        if(mysqli_query($con,$flatPostQuery)){
+            $getThisPost_id_sql="SELECT max(postID_pr) AS post_id FROM `parking` WHERE userID_pr='$userId'";
+            $getThisPost_id_Query=mysqli_fetch_assoc(mysqli_query($con,$getThisPost_id_sql));
+            $thisPost_id=$getThisPost_id_Query["post_id"];
+            $t_image=count($_FILES['images']['name']);
+            $i=0;
+            while($i<$t_image){
+                $img_name=$_FILES['images']['name'][$i];
+                $img_tmp=$_FILES['images']['tmp_name'][$i];
+                $img_loc="images/parkingimages/".$img_name;
+                move_uploaded_file($img_tmp,$img_loc);
+                $img_ins="INSERT INTO parkingimage VALUES('$thisPost_id','$img_loc')";
+                mysqli_query($con,$img_ins);
+                $i+=1;
+            }
+        }
+    }
+    header("location: flatpost.php");
 ?>
 
 <!-- <div class="container">

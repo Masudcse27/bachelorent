@@ -52,12 +52,9 @@
                 </a>
                 <a class="nav-link <?php if($post==true) echo 'active' ?>" id="Posts-tab" data-toggle="pill" href="#Posts" role="tab" aria-controls="Posts" aria-selected="<?php echo $post; ?>">
                   <i class="fa fa-building text-center mr-1"></i> 
-                  Posts
+                  Parking Post
                 </a>
-                <a class="nav-link" id="Expanses-tab" data-toggle="pill" href="#Expanses" role="tab" aria-controls="Expanses" aria-selected="false">
-                  <i class="fa fa-calculator text-center mr-1"></i> 
-                  Expanses
-                </a>
+                
               </div>
             </div>
             <div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
@@ -66,6 +63,7 @@
                   <div class="container">
                     <h2>Post for Flat Rent</h2>
                     <form action="flatpostcon.php" method="POST" enctype="multipart/form-data">
+                      <input type="hidden" name="submitFlatPost"/>
                       <div class="form-group">
                         <label for="PhoneNumber">Phone Number</label>
                         <input type="phone" class="form-control" placeholder="01XXXXXXXXX" name="number" required />
@@ -102,7 +100,7 @@
                         <label for="mainImage">Other Images</label>
                         <input type="file" class="form-control" name="images[]" multiple required />
                       </div>
-                      <button type="submit" name="submitFlatPost" class="btn btn-primary">Submit</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                   </div>  
               </div>
@@ -110,7 +108,8 @@
               <div class="tab-pane fade show <?php if($pass==true) echo 'active' ?>" id="password" role="tabpanel" aria-labelledby="password-tab">
                 <div class="container">
                   <h2>Post for room mate</h2>
-                  <form action="" method="POST" enctype="multipart/form-data">
+                  <form action="flatpostcon.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="submitroommet"/>
                     <div class="form-group">
                       <label for="PhoneNumber">Phone Number</label>
                       <input type="phone" class="form-control" placeholder="01XXXXXXXXX" name="number" required />
@@ -151,7 +150,7 @@
                       <label for="mainImage">Other Images</label>
                       <input type="file" class="form-control" name="images[]" multiple required />
                     </div>
-                    <button type="submit" name="submitroommet" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
                 </div>
               </div>
@@ -161,7 +160,8 @@
               <div class="tab-pane fade show <?php if($post==true) echo 'active' ?>" id="Posts" role="tabpanel" aria-labelledby="Posts-tab">
                 <div class="container">
                   <h2>Post Your Parking Lot</h2>
-                  <form action="post.php" method="POST" enctype="multipart/form-data">
+                  <form action="flatpostcon.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="submitparking"/>
 
                     <div class="form-group ">
                         <label for="inputState">Category</label>
@@ -180,8 +180,8 @@
                     </div>
 
                     <div class="form-group" >
-                        <label for="inputCity">Rant</label>
-                        <input required type="number" name="rant" class="form-control" id="inputCity">
+                        <label for="inputCity">Rent</label>
+                        <input required type="number" name="rent" class="form-control" id="inputCity">
                     </div>
 
                     <div class="form-group">
@@ -196,52 +196,14 @@
 
                     <div class="form-group" >
                         <label for="exampleFormControlFile1">Pictures</label>
-                        <input type="file" class="form-control-file" name="image[]" multiple required>
+                        <input type="file" class="form-control-file" name="images[]" multiple required>
                     </div>
                     <button type="submit" name="submitparking" class="btn btn-primary">Post</button>
                   </form>
                 </div>
 
               </div>
-              <div class="tab-pane fade p-4 p-md-5" id="Expanses" role="tabpanel" aria-labelledby="Expanses-tab">
-                <h3 class="mb-4">Your Expanses</h3>
-                <div class="row">
-                  <div class="col-lg-6 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Expanse 1</h5>
-                            <p class="card-text">Personal</p>
-                            <p class="font-weight-bold pt-1">৳ 2900</p>
-                            <div class="row">
-                              <div class="col pl-4">
-                                <button type="button" class="btn btn-primary m-2 btn-lg">View</button>
-                              </div>
-                              <div class="col-auto pr-4">
-                                <button type="button" class="btn btn-primary align-self-end m-2 btn-lg">Edit</button>
-                              </div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Expanse 2</h5>
-                            <p class="card-text">Group</p>
-                            <p class="font-weight-bold pt-1">৳ 2900</p>
-                            <div class="row">
-                              <div class="col pl-4">
-                                <button type="button" class="btn btn-primary m-2 btn-lg">View</button>
-                              </div>
-                              <div class="col-auto pr-4">
-                                <button type="button" class="btn btn-primary align-self-end m-2 btn-lg">Edit</button>
-                              </div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
