@@ -223,7 +223,7 @@
                   </div>
                   <?php } ?>
               </div>
-              <div class="tab-pane fade p-4 p-md-5" id="Expanses" role="tabpanel" aria-labelledby="Expanses-tab">
+              <!-- <div class="tab-pane fade p-4 p-md-5" id="Expanses" role="tabpanel" aria-labelledby="Expanses-tab">
                 <h3 class="mb-4">Your Expanses</h3>
                 <div class="row">
                   <div class="col-lg-6 col-md-6">
@@ -261,7 +261,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
