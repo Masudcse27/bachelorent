@@ -46,30 +46,27 @@
         <div class="row pt-4">
             <div class="col text-center rounded">
                 <a  href="flatrent.php">
-                    <p class="display-1 rounded-circle bg-success p-2 m-1">🏢</p>
+                    <p class="display-1 rounded bg-success p-2 m-1">🏢</p>
                     <p class="display-5 text-success">Flat Rent</p>
                 </a>
             </div>
             <div class="col text-center rounded ">
                 <a  style="color:inherit;" href="roommate.php">
-                    <p class="display-1 rounded-circle bg-dark p-2 m-1">🏢</p>
+                    <p class="display-1 rounded bg-dark p-2 m-1">🏢</p>
                     <p class="display-5 text-success">Roommate Finder</p>
                 </a>
             </div>
             <div class="col text-center rounded">
-                <p class="display-1 rounded-circle bg-warning p-2 m-1">🏢</p>
+                <p class="display-1 rounded bg-warning p-2 m-1">🏢</p>
                 <p class="display-5 text-success">Parking Search</p>
             </div>
+            
             <div class="col text-center rounded">
-                <p class="display-1 rounded-circle bg-secondary p-2 m-1">🏢</p>
-                <p class="display-5 text-success">Expense</p>
-            </div>
-            <div class="col text-center rounded">
-                <p class="display-1 rounded-circle bg-danger p-2 m-1">🏢</p>
+                <p class="display-1 rounded bg-danger p-2 m-1">🏢</p>
                 <p class="display-5 text-success">Booking Service</p>
             </div>
             <div class="col text-center rounded">
-                <p class="display-1 rounded-circle bg-primary p-2 m-1">🏢</p>
+                <p class="display-1 rounded bg-primary p-2 m-1">🏢</p>
                 <p class="display-5 text-success">Internet Service</p>
             </div>
         </div>

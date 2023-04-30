@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2023 at 05:09 AM
+-- Generation Time: Apr 30, 2023 at 08:19 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -24,6 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admintab`
+--
+
+CREATE TABLE `admintab` (
+  `adminID` int(11) NOT NULL,
+  `adminEmail` varchar(50) DEFAULT NULL,
+  `adminPassword` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admintab`
+--
+
+INSERT INTO `admintab` (`adminID`, `adminEmail`, `adminPassword`) VALUES
+(1, 'masudd@gmail.com', 'mas2345763');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `bookingrequest`
 --
 
@@ -34,15 +53,16 @@ CREATE TABLE `bookingrequest` (
   `number` varchar(20) DEFAULT NULL,
   `transcationId` varchar(50) DEFAULT NULL,
   `amount` int(11) DEFAULT NULL,
-  `reqStatus` tinyint(1) DEFAULT NULL
+  `reqStatus` tinyint(1) DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bookingrequest`
 --
 
-INSERT INTO `bookingrequest` (`catagory`, `paymentMathod`, `postid_b`, `number`, `transcationId`, `amount`, `reqStatus`) VALUES
-('Flat', 'Bkash', 7, '01786968368', '124567', 502, 1);
+INSERT INTO `bookingrequest` (`catagory`, `paymentMathod`, `postid_b`, `number`, `transcationId`, `amount`, `reqStatus`, `userId`) VALUES
+('Flat', 'Bkash', 7, '01786968368', '124567', 502, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -76,7 +96,7 @@ INSERT INTO `flat` (`flatID`, `userID`, `phoneNumber_F`, `email_F`, `postDate`, 
 (4, 1, '87295025825', 'maas@gmail.com', '2023-04-02', '2023-04-15', 1003, 'naton bazar', 'kasjb;ljaldbf', 'bkanfb', 1, 'images/flatmainimages/P3.jpg', NULL),
 (5, 1, '87295025825', 'maas@gmail.com', '2023-04-02', '2023-04-15', 1003, 'naton bazar', 'kasjb;ljaldbf', 'bkanfb', 1, 'images/flatmainimages/P3.jpg', NULL),
 (6, 1, '87295025825', 'maas@gmail.com', '2023-04-02', '2023-04-15', 1003, 'naton bazar', 'kasjb;ljaldbf', 'bkanfb', 1, 'images/flatmainimages/P3.jpg', NULL),
-(7, 1, '87295025825', 'maasud@gmail.com', '2023-04-02', '2023-04-26', 1004, 'syednogor', 'joLNVpsav', 'ibkwgao;b', 1, 'images/flatmainimages/P3.jpg', NULL),
+(7, 1, '87295025825', 'maasud@gmail.com', '2023-04-02', '2023-04-26', 1004, 'syednogor', 'joLNVpsav', 'ibkwgao;b', 0, 'images/flatmainimages/P3.jpg', 1),
 (8, 1, '87295025825', 'maasud@gmail.com', '2023-04-08', '2023-04-19', 1000, 'syednogor', 'joLNVpsav', 'hjk;kjvzhonjvlnojjwlv', 0, 'images/flatmainimages/Home.jpg', NULL),
 (9, 1, '87295025825', 'bmasud032@gmail.com', '2023-04-29', '2023-04-28', 1000, 'syednogor', 'joLNVpsav', 'GGSSV', 0, 'images/flatmainimages/5.jpg', 0),
 (10, 1, '87295025825', 'mas@gmail.com', '2023-04-29', '2023-04-28', 1001, 'naton bazar', 'kasjb;ljaldbf', 'nkaj;mfv', 1, 'images/flatmainimages/11.jpg', 0),
@@ -212,6 +232,27 @@ CREATE TABLE `roommateimages` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `serveses`
+--
+
+CREATE TABLE `serveses` (
+  `servestype` varchar(20) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `phonenumber` varchar(20) DEFAULT NULL,
+  `nidnumber` varchar(30) DEFAULT NULL,
+  `serviselocation` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `serveses`
+--
+
+INSERT INTO `serveses` (`servestype`, `name`, `phonenumber`, `nidnumber`, `serviselocation`) VALUES
+('Booking_Service', 'rahim', '87295025825', '79020', 'naton bazar');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -235,11 +276,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `email`, `gender`, `Date_of_Birth`, `NID`, `UserAddress`, `UserNumber`, `Passdord`, `acountCreateDate`, `isAcountAccepted`) VALUES
-(1, 'masud', 'Bhui', 'bmasud@gmail.com', 'Male', '2023-03-29', '26254', 'faggdf', '01781896903', 'mas123', '0000-00-00', 0);
+(1, 'masud', 'Bhui', 'bmasud@gmail.com', 'Male', '2023-03-29', '26254', 'faggdf', '01781896903', 'mas123', '0000-00-00', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admintab`
+--
+ALTER TABLE `admintab`
+  ADD PRIMARY KEY (`adminID`);
 
 --
 -- Indexes for table `flat`
@@ -291,6 +338,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admintab`
+--
+ALTER TABLE `admintab`
+  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `flat`
