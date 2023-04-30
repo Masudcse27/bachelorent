@@ -26,7 +26,7 @@
                             </div>
                             <hr>
 
-                            <a href="flatpost.php" class="sub-menu-link">
+                            <a href="post.php" class="sub-menu-link">
                                 <p>List Your Space</p>
                             </a>
                             <a href="#" class="sub-menu-link">

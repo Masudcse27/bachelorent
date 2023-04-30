@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php include('template/check_login.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -382,10 +382,24 @@
                         <option value="">Choose Division</option>
                         <option value="">Dhaka</option>
                     </select> -->
+                    
                     <input type="text" class="form-control"  placeholder="Enter Address" name="address" required />
                 </div>
             </div>
-            
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <!-- <select name="Division" id="" class="form-control">
+                        <option value="">Choose Division</option>
+                        <option value="">Dhaka</option>
+                    </select> -->
+                    <select name="category" id="inputState" class="form-control" required>
+                            <option value="">choose category</option>
+                            <option value="Bike">Bike</option>
+                            <option value="Car">Car</option>
+                        </select>
+                    <!-- <input type="text" class="form-control"  placeholder="Enter Address" name="address" required /> -->
+                </div>
+            </div>
             <div class="col-sm-3">
                 <div class="form-group">
                     <button type="submit" name="search"class="btn btn-primary px-5">Search</button>
@@ -397,19 +411,20 @@
     </div>
     <div class="container">
         <?php
-        $getHouse_sqlQuery="SELECT taglineDescription,flatRent,mainImage,flatID,flatLocation
-        FROM flat 
-        WHERE activeStatus=true
-        ORDER BY flatID DESC";
+        $getParking_sqlQuery="SELECT shortdec,rent_pr,frontImage_pr,freefrom_pr,Location_pr
+        FROM parking 
+        WHERE active_pr=true
+        ORDER BY postID_pr DESC";
           if(isset($_POST['search'])){
             $location=$_POST['address'];
-            $getHouse_sqlQuery="SELECT taglineDescription,flatRent,mainImage,flatID,flatLocation
-            FROM flat 
-            WHERE activeStatus=true AND flatLocation LIKE '%$location%'
-            ORDER BY flatID DESC";
+            $cata=$_POST['category'];
+            $getParking_sqlQuery="SELECT shortdec,rent_pr,frontImage_pr,freefrom_pr,Location_pr
+            FROM parking 
+            WHERE active_pr=true AND category=$cata AND Location_pr LIKE '%$location%'
+            ORDER BY postID_pr DESC";
          }
-        $con=mysqli_connect('localhost','root','','bachelorent');
-        $getHouse=mysqli_query($con,$getHouse_sqlQuery);
+        //$con=mysqli_connect('localhost','root','','bachelorent');
+        $getHouse=mysqli_query($con,$getParking_sqlQuery);
         ?>
         <div class="row">
             <?php
@@ -417,13 +432,13 @@
             ?>
             <div class="col-lg-4 col-md-6">
                 <div class="card">
-                    <img class="card-img-top" src="<?php echo $flats['mainImage'] ?>" alt="Property image">
+                    <img class="card-img-top" src="<?php echo $flats['frontImage_pr'] ?>" alt="Property image">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $flats['taglineDescription'] ?></h5>
-                        <span class="card-text"><i class="fas">&#xf3c5;</i> <?php echo $flats['flatLocation'] ?></span>
+                        <h5 class="card-title"><?php echo $flats['shortdec'] ?></h5>
+                        <span class="card-text"><i class="fas">&#xf3c5;</i> <?php echo $flats['Location_pr'] ?></span>
                         <!-- <p class="card-text"><i class="fas"></i>&#xf3c5;</p> -->
-                        <p class="font-weight-bold pt-3">৳ <?php echo $flats['flatRent'] ?></p>
-                        <a href="viewdetails.php?id=<?php echo $flats['flatID'] ?>" class="card-link">View Details</a>
+                        <p class="font-weight-bold pt-3">৳ <?php echo $flats['rent_pr'] ?></p>
+                        <a href="viewdetails.php" class="card-link">View Details</a>
                     </div>
                 </div>
             </div>

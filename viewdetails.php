@@ -1,3 +1,12 @@
+<?php
+    include('template/check_login.php');
+    $pID=$_GET['id'];
+    $getSQL="SELECT * FROM flat WHERE flatID=$pID";
+    $getData=mysqli_fetch_assoc(mysqli_query($con,$getSQL));
+    $sql_pic= "SELECT flatImagesLocation FROM flatimages WHERE 	faltPostID='$pID'";
+    $TotalImg=mysqli_num_rows(mysqli_query($con,$sql_pic));
+    $picture_loc=mysqli_query($con,$sql_pic);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -230,8 +239,7 @@
          <div class="container-xl p-3">
             <div class="row">
                 <div class="col-9 p-2 pl-4 pb-4">
-                    <h1 class="text-indigo-700 border-bottom border-right rounded border-warning border-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                         Mollitia, blanditiis. Nulla vero, sapiente aut atque ut enim! Nihil, non. </h1>
+                    <h1 class="text-indigo-700 border-bottom border-right rounded border-warning border-2"><?php echo $getData['taglineDescription'] ?></h1>
                 </div>
                 <div class="col-3 p-2 pl-4 ">
                     <h1 class="text-secondary al"></h1>
@@ -243,23 +251,40 @@
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                                <!-- <li data-target="#carouselExampleIndicators" data-slide-to="1"></li> -->
+                                <?php 
+                                    $i=1;
+                                    while($i<=$TotalImg){
+                                ?>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo $i ?>"></li>
+                                <?php
+                                    $i+=1;
+                                    }
+                                    $i=1;
+                                ?>
                                 </ol>
                                 <div class="carousel-inner">
+                                    
                                 <div class="carousel-item active">
-                                    <img class="d-block w-100" src="images/Home.jpg" alt="First slide">
+                                    <img class="d-block w-100" src="<?php echo $getData['mainImage']; ?>" alt="0">
+                                </div>
+                                <?php
+                                while($pic=mysqli_fetch_assoc($picture_loc)){
+                                ?>
+
+                                <div class="carousel-item">
+                                    <img class="d-block w-100" src="<?php echo $pic['flatImagesLocation']; ?>" alt="<?php echo $i ?>">
+                                </div>
+                                <?php 
+                                $i+=1;
+                                }
+                                ?>
+                                <!-- <div class="carousel-item">
+                                    <img class="d-block w-100" src="images/P2.jpg" alt="2">
                                 </div>
                                 <div class="carousel-item">
-                                    <img class="d-block w-100" src="images/P1.jpg" alt="Second slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="images/P2.jpg" alt="Third slide">
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100" src="images/P3.jpg" alt="Fouth slide">
-                                </div>
+                                    <img class="d-block w-100" src="images/P3.jpg" alt="3">
+                                </div> -->
                                 </div>
                                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -281,37 +306,17 @@
                                             <ul class="list-2-cols list-unstyled">
                                                 <div class="row p-4">
                                                     <div class="col">
-                                                        <li><strong>Property Size: </strong>5200 Sq Ft.</li>
-                                                        <li><strong>Parking: </strong>02 Car Parking<strong><br></strong></li>
-                                                        <li><strong>Lift: </strong>03</li>
-                                                        <li><strong>Floor: </strong>Ground&nbsp; floor</li>
-                                                        <li><strong>Unit Per Floor: </strong>01</li>
-                                                        <li><strong>Price:</strong> BDT 15,60,000/- (BDT 300/- Per Sq. Ft.)</li>
-                                                        <li><strong>Service Charge:&nbsp;</strong>BDT 52,000/- (BDT 10/- Per Sq. Ft.)</li>
-                                                        <li><strong>Year Built: </strong>2018</li>
-                                                        <li><strong>Garage Size: </strong>240 Sq. Ft.</li>
-                                                        <li class="prop_type"><strong>Property Type:</strong> Commercial</li>
+                                                        <li><strong>Contract number: </strong><?php echo $getData['phoneNumber_F'] ?></li>
+                                                        <li><strong>Email: </strong><?php echo $getData['email_F'] ?><strong><br></strong></li>
+                                                        <li><strong>Available from: </strong><?php echo $getData['availableDate'] ?></li>
+                                                        <li><strong>Rent: </strong><?php echo $getData['flatRent'] ?></li>
                                                     </div>
                                                     <div class="col">
-                                                        <li class="prop_status"><strong>Property Purpose: </strong>For Rent</li>
-                                                        <li class="interior"><strong>Interior: </strong>Un-Furnished</li>
-                                                        <li class="building-reg"><strong>Building Registration Type:</strong> Commercial</li>
-                                                        <li class="front-road-size"><strong>Front Road Size:</strong> 50 Ft.</li>
-                                                        <li class="total-units"><strong>Total Units:</strong> 12 Units</li>
-                                                        <li><strong>Basement: </strong>Basement 04</li>
-                                                        <li class="common-area"><strong>Common Area: </strong>280 Sq Ft</li>
-                                                        <li class="nearby-landmark"><strong>Nearby Landmark: </strong>Gulshan Avenue</li>
-                                                        <li class="preferred-tenant"><strong>Preferred Tennant: </strong>Corporate Office or MNC Office</li>
-                                                        <li class="building-facing"><strong>Building Facing:</strong> North Facing</li>
-                                                        <li><strong>Property ID:</strong> RT 100813</li>
+                                                        <li class="prop_status"><strong>Details: </strong><?php echo $getData['flatDetails'] ?></li>
+                                                        <li class="interior"><strong>Location: </strong><?php echo $getData['flatLocation'] ?></li>
                                                     </div>
                                                 </div>
-                                                </ul>
-
-                                                <p>Wants to visit this commercial space for rent, just WhatsApp (+8801xxx xxx xxx)
-                                                    this property link or call us and share your convenient viewing schedule.
-                                                    </p>
-                            
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -319,13 +324,13 @@
 
 
                             
-                        <h4 class="text-white bg-info rounded p-2 text-center">Address</h4>
+                        <!-- <h4 class="text-white bg-info rounded p-2 text-center">Address</h4>
                           <div class="container">  
                             <div class="property-address-wrap property-section-wrap" id="property-address-wrap">
                                 <div class="block-wrap">
                                     <div class="block-title-wrap p-2">
                                                   <a class="btn btn-primary btn-slim" href="http://maps.google.com/?q=Gulshan,%20Dhaka%201212" target="_blank"><i class="houzez-icon icon-maps mr-1"></i> Open on Google Maps</a>    
-                                    </div><!-- block-title-wrap -->
+                                    </div>
                                     <div class="block-content-wrap">
                                         <ul class="list-2-cols list-unstyled">
                                             <div class="row">
@@ -342,12 +347,12 @@
                                             
                                             </div>
                                         </ul>	
-                                    </div><!-- block-content-wrap -->
+                                    </div>
                             
                                     
-                                </div><!-- block-wrap -->
+                                </div>
                             </div>
-                          </div>
+                          </div> -->
 
                     </div>
                 </div>
@@ -394,7 +399,8 @@
                 </div> -->
                 <div class="row pt-4">
                     <div class="col d-flex justify-content-center">
-                        <button type="button" class="btn btn-success btn-lg">Book Now</button>
+                        <a type="button" class="btn btn-success btn-lg" href="booking.php?id=<?php echo $pID; ?>">Book Now</a>
+                        <!-- <button ></button> -->
                 
                 </div>
 

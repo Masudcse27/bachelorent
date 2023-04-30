@@ -2,15 +2,15 @@
   $pro=true;
   $pass=false;
   $post=false;
-  if(isset($_SESSION['pro_pass'])){
+  if(isset($_SESSION['room'])){
     $pass=true;
     $pro=false;
-    unset($_SESSION['pro_pass']);
+    unset($_SESSION['room']);
   }
-  if(isset($_SESSION['pro_post'])){
+  if(isset($_SESSION['parking'])){
     $post=true;
     $pro=false;
-    unset($_SESSION['pro_post']);
+    unset($_SESSION['parking']);
   }
 ?>
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Home</title>
+    <title>POST</title>
 
     <!-- CSS Part -->
 
@@ -188,7 +188,10 @@
                       <label for="availableDate">Available From</label>
                       <input type="date" class="form-control"  name="available" required />
                     </div>
-
+                    <div class="form-group">
+                      <label for="TagDescription">Short description</label>
+                      <input type="text" class="form-control" placeholder="Enter short description" name="tag_Descrip" required />
+                    </div>
                     <div class="form-group">
                         <label for="mainImage">Main Image</label>
                         <input type="file" class="form-control" name="mainimage" required />

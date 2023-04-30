@@ -1,5 +1,7 @@
 <?php
 include('template/check_login.php');
+unset($_SESSION['room']);
+unset($_SESSION['parking']);
 $userId=$_SESSION['UserId'];
     if(isset($_POST['submitFlatPost'])){
         $Number=$_POST['number'];
@@ -64,7 +66,7 @@ $userId=$_SESSION['UserId'];
                 mysqli_query($con,$img_ins);
                 $i+=1;
             }
-            
+            $_SESSION['room']=1;
         }
     }
     else{
@@ -72,11 +74,12 @@ $userId=$_SESSION['UserId'];
         $loccation=$_POST['Location'];
         $Rent=$_POST['rent'];
         $freeFrom=$_POST['available'];
+        $tagDescrip=$_POST['tag_Descrip'];
         $mainImageName=$_FILES['mainimage']['name'];
         $mainImageTmpName= $_FILES['mainimage']['tmp_name'];
         $mainImageLocation="images/parkingmainimg/".$mainImageName;
         move_uploaded_file($mainImageTmpName,$mainImageLocation);
-        $flatPostQuery="INSERT parking VALUES(NULL,'$userId','$catagory','$loccation',now(),'$freeFrom','$Rent',1,0,'$mainImageLocation')";
+        $flatPostQuery="INSERT parking VALUES(NULL,'$userId','$catagory','$loccation',now(),'$freeFrom','$Rent',1,0,'$mainImageLocation','$tagDescrip')";
         if(mysqli_query($con,$flatPostQuery)){
             $getThisPost_id_sql="SELECT max(postID_pr) AS post_id FROM `parking` WHERE userID_pr='$userId'";
             $getThisPost_id_Query=mysqli_fetch_assoc(mysqli_query($con,$getThisPost_id_sql));
@@ -92,9 +95,10 @@ $userId=$_SESSION['UserId'];
                 mysqli_query($con,$img_ins);
                 $i+=1;
             }
+            $_SESSION['parking']=1;
         }
     }
-    header("location: flatpost.php");
+    header("location: post.php");
 ?>
 
 <!-- <div class="container">
